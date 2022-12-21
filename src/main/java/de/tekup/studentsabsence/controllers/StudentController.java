@@ -103,19 +103,15 @@ public class StudentController {
         return "redirect:/students";
     }
 
-    @RequestMapping(value = "/{sid}/display-image", method = RequestMethod.GET)
-    public void getStudentPhoto(HttpServletResponse response,
-                                @PathVariable("sid") long sid) throws ServletException,Exception {
+    @RequestMapping(value = "/{sid}/display-image")
+    public void getStudentPhoto(HttpServletResponse response, @PathVariable("sid") long sid) throws Exception {
         Student student = studentService.getStudentBySid(sid);
         Image image = student.getImage();
-        System.out.println("image of student" + image);
 
         if(image != null) {
             response.setContentType(image.getFileType());
             InputStream inputStream = new ByteArrayInputStream(image.getData());
-            //IOUtils.copy(inputStream, response.getOutputStream());
-            response.getOutputStream().write(image.getData());
-            response.getOutputStream().close();
+            IOUtils.copy(inputStream, response.getOutputStream());
         }
     }
 

@@ -125,7 +125,8 @@ public class GroupController {
     }
 
     @GetMapping("/{id}/add-absences")
-    public String addAbsenceView(@PathVariable long id, Model model) {
+    public String addAbsenceView(@PathVariable long id,
+                                 Model model) {
         Group group = groupService.getGroupById(id);
 
         model.addAttribute("group", group);
