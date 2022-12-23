@@ -1,7 +1,12 @@
 package de.tekup.studentsabsence.services.impl;
 
+import de.tekup.studentsabsence.entities.GroupSubject;
+import de.tekup.studentsabsence.entities.Student;
 import de.tekup.studentsabsence.entities.Subject;
 import de.tekup.studentsabsence.repositories.SubjectRepository;
+import de.tekup.studentsabsence.services.AbsenceService;
+import de.tekup.studentsabsence.services.GroupSubjectService;
+import de.tekup.studentsabsence.services.StudentService;
 import de.tekup.studentsabsence.services.SubjectService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -14,6 +19,9 @@ import java.util.NoSuchElementException;
 @AllArgsConstructor
 public class SubjectServiceImp implements SubjectService {
     private final SubjectRepository subjectRepository;
+    private final GroupSubjectService groupSubjectService;
+    private final StudentService studentService;
+    private final AbsenceService absenceService;
 
     //TODO Complete this method
     @Override
@@ -43,6 +51,18 @@ public class SubjectServiceImp implements SubjectService {
         return subjectRepository.save(subject);
     }
 
+    @Override
+    public boolean elimStudentByGroup(Long id, Long gid, Long sid) {
+        GroupSubject groupSubject = groupSubjectService.getSubjectsGroupBySubjectIdAndGroupId(id,gid);
+        Student student = studentService.getStudentBySid(sid);
+        float hour = groupSubject.getHours();
+        float res = absenceService.hoursCountByStudentAndSubject(student.getSid(),id);
+        if(hour < res * 4){
+            return true;
+        }else {
+            return false;
+        }
+    }
     @Override
     public Subject deleteSubject(Long id) {
         Subject subject = getSubjectById(id);

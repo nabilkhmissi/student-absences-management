@@ -16,5 +16,8 @@ public interface SubjectService {
 
     Subject updateSubject(Subject subject);
 
+    //Question 2
+    boolean elimStudentByGroup(Long id , Long gid, Long sid);
+
 
 }
