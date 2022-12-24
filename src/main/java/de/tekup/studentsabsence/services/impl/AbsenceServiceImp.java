@@ -5,7 +5,6 @@ import de.tekup.studentsabsence.repositories.AbsenceRepository;
 import de.tekup.studentsabsence.services.AbsenceService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;

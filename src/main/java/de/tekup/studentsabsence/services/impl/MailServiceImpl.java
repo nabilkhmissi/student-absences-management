@@ -13,18 +13,22 @@ import org.springframework.stereotype.Service;
 public class MailServiceImpl implements MailService {
 
     private JavaMailSender javaMailSender;
-
     @Override
-    public void sendEliminatedEmail(Student student, Subject subject) {
-
-        SimpleMailMessage mailMessage=new SimpleMailMessage();
-        mailMessage.setFrom("nabilkhmissi10@gmail.com");
+    public void sendEliminationEmail(Student student, Subject subject) {
+    try{
+        SimpleMailMessage mailMessage = new SimpleMailMessage();
+        mailMessage.setFrom("bila5missi@gmail.com");
         mailMessage.setTo(student.getEmail());
-        mailMessage.setText("Hello Mr " + student.getFirstName() + " " + student.getLastName() + " " +
-                "nous vous informos que vous etes eliminé de la matiere : " + subject.getName()+ " " +
-                "a cause de vos abscences successives ...");
+        mailMessage.setText("bonjour " + student.getFirstName() + " " + student.getLastName() + ". " +
+                "Nous vous informos que vous etes eliminé de la matière: " + subject.getName()+ " " +
+                "à cause de vos abscences successives ...");
         mailMessage.setSubject("[elimination de la matiere: " + subject.getName() + " ]");
         javaMailSender.send(mailMessage);
+        System.out.println("mail sent successfully");
+    }   catch (Exception e){
+        System.out.println("something went wrong ...");
+    }
+
     }
 }
 

@@ -4,5 +4,5 @@ import de.tekup.studentsabsence.entities.Student;
 import de.tekup.studentsabsence.entities.Subject;
 
 public interface MailService {
-    void sendEliminatedEmail(Student student, Subject subject);
+    void sendEliminationEmail(Student student, Subject subject);
 }

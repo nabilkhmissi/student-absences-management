@@ -52,13 +52,12 @@
                                         <th class="text-primary"> Send Email</th>
                                         </thead>
                                         <tr th:each="student : ${group.getStudents()}"
-                                            th:if="${subjectService.elimStudentByGroup(subject.id,group.id,student.sid) == true}">
-
+                                            th:if="${subjectService.isStudentEliminated(subject.id,group.id,student.sid) == true}">
                                             <td th:text="${student.firstName+' '+student.lastName}"></td>
                                             <td th:text="${group.name}"></td>
                                             <td>
                                                 <a class="btn btn-link btn-primary btn-just-icon remove"
-                                                   th:href="@{/subjects/Mail/{sid}/{sbid} (sid=${student.sid}, sbid=${subject.id})}"
+                                                   th:href="@{/subjects/sendMail/{sid}/{sbid} (sid=${student.sid}, sbid=${subject.id})}"
                                                 ><i class="material-icons">mail</i></a>
                                             </td>
                                         </tr >

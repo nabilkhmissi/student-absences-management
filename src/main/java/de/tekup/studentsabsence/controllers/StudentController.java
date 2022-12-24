@@ -12,8 +12,6 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import java.io.ByteArrayInputStream;
@@ -53,14 +51,12 @@ public class StudentController {
         studentService.addStudent(student);
         return "redirect:/students";
     }
-
     @GetMapping("/{sid}/update")
     public String updateView(@PathVariable Long sid, Model model) {
         model.addAttribute("student", studentService.getStudentBySid(sid));
         model.addAttribute("groups", groupService.getAllGroups());
         return "students/update";
     }
-
     @PostMapping("/{sid}/update")
     public String update(@PathVariable Long sid,
                          @Valid Student student,

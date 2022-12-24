@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-
 import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
@@ -48,7 +47,6 @@ public class SubjectController {
         if(bindingResult.hasErrors()) {
             return "subjects/add";
         }
-       // System.out.println(subject);
         subjectService.addSubject(subject);
         return "redirect:/subjects";
     }
@@ -88,11 +86,11 @@ public class SubjectController {
     }
 
     //SEND MAIL
-    @GetMapping("/Mail/{sid}/{sbid}")
+    @RequestMapping("/sendMail/{sid}/{sbid}")
     public String sendingMail(@PathVariable Long sid,@PathVariable Long sbid){
         Subject subject=subjectService.getSubjectById(sbid);
         Student student= studentService.getStudentBySid(sid);
-        mailService.sendEliminatedEmail(student,subject);
+        mailService.sendEliminationEmail(student,subject);
         return "redirect:/subjects/"+sbid+"/show";
     }
 

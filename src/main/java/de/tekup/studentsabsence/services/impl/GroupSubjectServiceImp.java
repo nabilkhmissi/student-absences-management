@@ -10,10 +10,8 @@ import de.tekup.studentsabsence.services.GroupService;
 import de.tekup.studentsabsence.services.GroupSubjectService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
-
 import java.util.ArrayList;
 import java.util.List;
-import java.util.NoSuchElementException;
 
 @Service
 @AllArgsConstructor
@@ -31,7 +29,6 @@ public class GroupSubjectServiceImp implements GroupSubjectService {
                 hours
         ));
     }
-
     @Override
     public List<GroupSubject> getSubjectsByGroupId(Long id) {
         Group group = groupService.getGroupById(id);
@@ -49,14 +46,14 @@ public class GroupSubjectServiceImp implements GroupSubjectService {
     //Question 1
     public Subject getSubjectByGroupHavingMaxAbsence(List<GroupSubject> groupSubjects){
         Subject subjectHavingMaxAbscence = new Subject();
-        float old = 0;
+        float init = 0;
         float max = 0;
-        for (GroupSubject item:groupSubjects) {
+        for (GroupSubject item : groupSubjects) {
             Long groupId = item.getGroup().getId();
             Long subjectId = item.getSubject().getId();
-            old = absenceService.hoursCountByGroupAndSubject(groupId, subjectId);
-            if(old > max){
-                max = old;
+            init = absenceService.hoursCountByGroupAndSubject(groupId, subjectId);
+            if(init > max){
+                max = init;
                 subjectHavingMaxAbscence=item.getSubject();
             }
         }
@@ -64,14 +61,14 @@ public class GroupSubjectServiceImp implements GroupSubjectService {
     }
     public Subject getSubjectByGroupHavingMinAbsence(List<GroupSubject> groupSubjects){
         Subject subjectHavingMinAbsence = new Subject();
-        float old = 0;
-        float min = 1000;
+        float init = 0;
+        float subjectHavingMinAbs = 1000;
         for (GroupSubject item:groupSubjects) {
             Long groupId = item.getGroup().getId();
             Long subjectId = item.getSubject().getId();
-            old = absenceService.hoursCountByGroupAndSubject(groupId, subjectId);
-            if(old < min){
-                min = old;
+            init = absenceService.hoursCountByGroupAndSubject(groupId, subjectId);
+            if(init < subjectHavingMinAbs){
+                subjectHavingMinAbs = init;
                 subjectHavingMinAbsence=item.getSubject();
             }
         }

@@ -121,7 +121,7 @@
                                         <th>Total Absences</th>
                                         </thead>
                                         <tbody>
-                                        <tr th:classappend="${'bg-danger text-light'}" >
+                                        <tr th:classappend="${'bg-secondary text-light'}" >
                                             <td th:text="${subjectHavingMaxAbsence.name}"></td>
                                             <td th:text="${absenceService.hoursCountByGroupAndSubject(group.id, subjectHavingMaxAbsence.id)+'h'}">
                                             </td>
@@ -148,7 +148,7 @@
                                         <th>Total Absences</th>
                                         </thead>
                                         <tbody>
-                                        <tr th:classappend="${'bg-success text-light'}" >
+                                        <tr>
                                             <td th:text="${subjectHavingMinAbsence.name}"></td>
                                             <td th:text="${absenceService.hoursCountByGroupAndSubject(group.id, subjectHavingMinAbsence.id)+'h'}"></td>
                                         </tr>
